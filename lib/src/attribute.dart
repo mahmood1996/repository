@@ -2,9 +2,9 @@ import 'comparison_expression.dart';
 import 'conditional_expression.dart';
 
 class Attribute<ValueType> {
-  final String name;
+  final String _name;
 
-  const Attribute.withName(this.name);
+  const Attribute.withName(this._name);
 
   ConditionalExpression equals(ValueType value) {
     return _createComparisonExpression(ComparisonOperator.equals, value);
@@ -14,12 +14,68 @@ class Attribute<ValueType> {
     return _createComparisonExpression(ComparisonOperator.greaterThan, value);
   }
 
-  ConditionalExpression _createComparisonExpression(
-      ComparisonOperator operator, ValueType value) {
-    return ComparisonExpression<ValueType>(
-      attributeName: name,
-      operator: operator,
-      value: value,
-    );
+  ConditionalExpression lessThan(ValueType value) {
+    return _createComparisonExpression(ComparisonOperator.lessThan, value);
   }
+
+  ConditionalExpression _createComparisonExpression(
+    ComparisonOperator operator,
+    ValueType value,
+  ) =>
+      ComparisonExpression<ValueType>(
+        attributeName: _name,
+        operator: operator,
+        value: value,
+      );
+
+  ConditionalExpression startWith(String value) {
+    var criteria = MatchingCriteria.startingWith;
+    return _createMatchingExpression(value, criteria);
+  }
+
+  ConditionalExpression endWith(String value) {
+    var criteria = MatchingCriteria.endingWith;
+    return _createMatchingExpression(value, criteria);
+  }
+
+  MatchingExpression _createMatchingExpression(
+    String value,
+    MatchingCriteria criteria,
+  ) =>
+      MatchingExpression(
+        attributeName: _name,
+        value: value,
+        criteria: criteria,
+      );
+}
+
+enum MatchingCriteria { startingWith, endingWith }
+
+class MatchingExpression implements ConditionalExpression {
+  final String attributeName;
+  final String value;
+  final MatchingCriteria criteria;
+
+  MatchingExpression({
+    required this.attributeName,
+    required this.value,
+    required this.criteria,
+  });
+
+  @override
+  String toString() {
+    return '''MatchingExpression: attributeName: $attributeName, value: $value, criteria: $criteria''';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    other = other as MatchingExpression;
+    return attributeName == other.attributeName &&
+        value == other.value &&
+        criteria == other.criteria;
+  }
+
+  @override
+  // ignore: unnecessary_overrides
+  int get hashCode => super.hashCode;
 }

@@ -5,8 +5,16 @@ Query's Test List
 - query has whereCondition.
 
 Attribute's Test List
+
+-- ComparisonExpression --
 (Done) attributeWithName('age').equals(0)
 (Done) attributeWithName('age').greaterThan(0)
+(Done) attributeWithName('age').lessThan(0)
+
+-- MatchingExpression --
+(Done) attributeWithName('name').startWith('ma')
+(Done) attributeWithName('name').endWith('ma')
+- attributeWithName('name').contains('ma')
 
 query
   ..where(

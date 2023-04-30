@@ -1,6 +1,6 @@
 import 'conditional_expression.dart';
 
-enum ComparisonOperator { equals, greaterThan }
+enum ComparisonOperator { equals, greaterThan, lessThan }
 
 class ComparisonExpression<ValueType> extends ConditionalExpression {
   final String attributeName;
