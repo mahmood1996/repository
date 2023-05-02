@@ -14,7 +14,7 @@ Attribute's Test List
 -- MatchingExpression --
 (Done) attributeWithName('name').startWith('ma')
 (Done) attributeWithName('name').endWith('ma')
-- attributeWithName('name').contains('ma')
+(Done) attributeWithName('name').contains('ma')
 
 query
   ..where(

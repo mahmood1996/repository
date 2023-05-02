@@ -74,6 +74,16 @@ void main() {
               criteria: MatchingCriteria.endingWith,
             ));
       });
+
+      test('contains(...)', () {
+        expect(
+            anyAttribute.contains('anyString'),
+            MatchingExpression(
+              attributeName: attributeName,
+              value: 'anyString',
+              criteria: MatchingCriteria.contains,
+            ));
+      });
     });
   });
 }

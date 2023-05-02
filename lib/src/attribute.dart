@@ -29,13 +29,15 @@ class Attribute<ValueType> {
       );
 
   ConditionalExpression startWith(String value) {
-    var criteria = MatchingCriteria.startingWith;
-    return _createMatchingExpression(value, criteria);
+    return _createMatchingExpression(value, MatchingCriteria.startingWith);
   }
 
   ConditionalExpression endWith(String value) {
-    var criteria = MatchingCriteria.endingWith;
-    return _createMatchingExpression(value, criteria);
+    return _createMatchingExpression(value, MatchingCriteria.endingWith);
+  }
+
+  ConditionalExpression contains(String value) {
+    return _createMatchingExpression(value, MatchingCriteria.contains);
   }
 
   MatchingExpression _createMatchingExpression(
@@ -49,7 +51,7 @@ class Attribute<ValueType> {
       );
 }
 
-enum MatchingCriteria { startingWith, endingWith }
+enum MatchingCriteria { startingWith, endingWith, contains }
 
 class MatchingExpression implements ConditionalExpression {
   final String attributeName;
