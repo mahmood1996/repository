@@ -1,5 +1,6 @@
 import 'comparison_expression.dart';
 import 'conditional_expression.dart';
+import 'matching_expression.dart';
 
 class Attribute<ValueType> {
   final String _name;
@@ -49,35 +50,4 @@ class Attribute<ValueType> {
         value: value,
         criteria: criteria,
       );
-}
-
-enum MatchingCriteria { startingWith, endingWith, contains }
-
-class MatchingExpression implements ConditionalExpression {
-  final String attributeName;
-  final String value;
-  final MatchingCriteria criteria;
-
-  MatchingExpression({
-    required this.attributeName,
-    required this.value,
-    required this.criteria,
-  });
-
-  @override
-  String toString() {
-    return '''MatchingExpression: attributeName: $attributeName, value: $value, criteria: $criteria''';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    other = other as MatchingExpression;
-    return attributeName == other.attributeName &&
-        value == other.value &&
-        criteria == other.criteria;
-  }
-
-  @override
-  // ignore: unnecessary_overrides
-  int get hashCode => super.hashCode;
 }

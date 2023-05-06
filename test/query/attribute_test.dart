@@ -85,5 +85,12 @@ void main() {
             ));
       });
     });
+
+    test('matching expression not equals comparison expression', () {
+      expect(
+          const Attribute<String>.withName('any').startWith('') ==
+              const Attribute<int>.withName('other').equals(0),
+          isFalse);
+    });
   });
 }
